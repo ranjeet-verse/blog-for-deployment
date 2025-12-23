@@ -2,15 +2,15 @@
 {% include "header.html" %}
 
 <!-- Page Header-->
-<header class="masthead" style="background-image: url('{{post.img_url}}')">
+<header class="masthead" style="background-image: url('{{ post.img_url }}')">
   <div class="container position-relative px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
       <div class="col-md-10 col-lg-8 col-xl-7">
         <div class="post-heading">
           <h1>{{ post.title }}</h1>
           <h2 class="subheading">{{ post.subtitle }}</h2>
-          <span class="meta"
-            >Posted by
+          <span class="meta">
+            Posted by
             <a href="#">{{ post.author.name }}</a>
             on {{ post.date }}
           </span>
@@ -25,7 +25,7 @@
   <div class="container px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
       <div class="col-md-10 col-lg-8 col-xl-7">
-        {{ post.body|safe }}
+        {{ post.body | safe }}
 
         <!--Only show Edit Post button if user id is 1 (admin user) -->
         {% if current_user.is_authenticated and current_user.id == 1 %}
@@ -39,38 +39,33 @@
         </div>
         {% endif %}
 
-
         <!-- Comments Area -->
         {% if current_user.is_authenticated %}
-        <!-- Load the CKEditor -->
-        {{ ckeditor.load() }}
-        <!-- Configure it with the name of the form field from CommentForm -->
-        {{ ckeditor.config(name='comment_text') }}
-        <!-- Create the wtf quick form from CommentForm -->
-        {{ render_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+          {{ ckeditor.load() }}
+          {{ ckeditor.config(name='comment_text') }}
+          {{ render_form(form, novalidate=True, button_map={"submit": "primary"}) }}
         {% else %}
-        <p><a href="{{ url_for('login') }}">Login</a> to leave a comment.</p>
+          <p><a href="{{ url_for('login') }}">Login</a> to leave a comment.</p>
         {% endif %}
 
         <div class="comment">
           <ul class="commentList">
-            <!-- Show all comments -->
             {% for comment in post.comments %}
             <li>
               <div class="commenterImage">
-                  <img
-                    src="{{ url_for('static', filename='img/default-profile.jpg') }}"
-                    alt="User Avatar"
-                  />
+                <img
+                  src="{{ url_for('static', filename='img/default-profile.jpg') }}"
+                  alt="User"
+                />
               </div>
 
               <div class="commentText">
-                {{ comment.text|safe }}
+                {{ comment.text | safe }}
                 <span class="sub-text">
                   {% if comment.comment_author %}
-                  {{ comment.comment_author.name }}
+                    {{ comment.comment_author.name }}
                   {% else %}
-                  Anonymous
+                    Anonymous
                   {% endif %}
                 </span>
               </div>
@@ -78,6 +73,7 @@
             {% endfor %}
           </ul>
         </div>
+
       </div>
     </div>
   </div>
