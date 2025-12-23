@@ -60,12 +60,12 @@
             {% for comment in post.comments %}
             <li>
               <div class="commenterImage">
-                {% if comment.comment_author and comment.comment_author.email %}
-                <img src="{{ comment.comment_author.email | gravatar }}" alt="Avatar" />
-                {% else %}
-                <img src="https://www.gravatar.com/avatar/?d=retro&s=100" alt="Default Avatar" />
-                {% endif %}
+                  <img
+                    src="{{ url_for('static', filename='img/default-profile.jpg') }}"
+                    alt="User Avatar"
+                  />
               </div>
+
               <div class="commentText">
                 {{ comment.text|safe }}
                 <span class="sub-text">
