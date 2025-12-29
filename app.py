@@ -12,8 +12,9 @@ from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 import smtplib
 import os
 
+
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
+app.config['SECRET_KEY'] = #Your Secret Key
 ckeditor = CKEditor(app)
 Bootstrap5(app)
 
@@ -26,8 +27,6 @@ login_manager.init_app(app)
 def load_user(user_id):
     return db.session.get(User, int(user_id))
 
-
-# For adding profile images to the comment section
 
 
 
@@ -269,4 +268,4 @@ def send_email(name, email, phone, message):
 
 
 if __name__ == "__main__":
-    app.run(debug=False, port=5001)
+    app.run(host='0.0.0.0', debug=False, port=5001)
